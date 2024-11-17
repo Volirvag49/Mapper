@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-namespace Mapper
+namespace Mappify
 {
-    public partial class Mapper
+    public partial class Mappify
     {
         public TD Map<TD>(object source)
         {
@@ -26,19 +26,19 @@ namespace Mapper
 
             if (IsGenericType(sourceType, typeof(Stack<>), out var stackGenericType))
             {
-                throw new MapperException(
+                throw new MappifyException(
                     $"Stack<> not supported. Use  MapStack<T>()");
             }
 
             if (IsGenericType(sourceType, typeof(Queue<>), out var queueGenericType))
             {
-                throw new MapperException(
+                throw new MappifyException(
                     $"Queue<> not supported. Use  MapQueue<T>()");
             }
 
             if (IsGenericType(sourceType, typeof(IDictionary<,>), out var dictionaryGenericTypes))
             {
-                throw new MapperException(
+                throw new MappifyException(
                     $"IDictionary not supported. Use  MapDictionary<T>()");
             }
 
@@ -113,7 +113,7 @@ namespace Mapper
 
                 if (func == null)
                 {
-                    throw new MapperException(
+                    throw new MappifyException(
                         $"Mapping function for {sourceType.Name} to {destinationType.Name} is not valid.");
                 }
 
@@ -121,7 +121,7 @@ namespace Mapper
                 return func.DynamicInvoke(source, this);
             }
 
-            throw new MapperException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
+            throw new MappifyException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
         }
 
 

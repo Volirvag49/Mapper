@@ -1,6 +1,6 @@
-﻿namespace Mapper
+﻿namespace Mappify
 {
-    public partial class Mapper
+    public partial class Mappify
     {
         public TD Map<TS1, TD>(TS1 source)
         {
@@ -15,11 +15,11 @@
             if (_mappingConfigurations.TryGetValue((sourceType, default, default, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, IMapper, TD>)mappingFunction)(source, this);
+                return ((Func<TS1, IMappify, TD>)mappingFunction)(source, this);
             }
 
 
-            throw new MapperException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
+            throw new MappifyException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
         }
 
         public TD Map<TS1, TS2, TD>(TS1 source1, TS2 source2)
@@ -36,10 +36,10 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, default, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, IMapper, TD>)mappingFunction)(source1, source2, this);
+                return ((Func<TS1, TS2, IMappify, TD>)mappingFunction)(source1, source2, this);
             }
 
-            throw new MapperException(
+            throw new MappifyException(
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name} => {destinationType.Name}");
         }
 
@@ -58,10 +58,10 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, IMapper, TD>)mappingFunction)(source1, source2, source3, this);
+                return ((Func<TS1, TS2, TS3, IMappify, TD>)mappingFunction)(source1, source2, source3, this);
             }
 
-            throw new MapperException(
+            throw new MappifyException(
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name}, {sourceType3.Name} => {destinationType.Name}");
         }
 
@@ -82,10 +82,10 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, sourceType4, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, TS4, IMapper, TD>)mappingFunction)(source1, source2, source3, source4, this);
+                return ((Func<TS1, TS2, TS3, TS4, IMappify, TD>)mappingFunction)(source1, source2, source3, source4, this);
             }
 
-            throw new MapperException(
+            throw new MappifyException(
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name}, {sourceType3.Name} => {destinationType.Name}");
         }
 
@@ -107,10 +107,10 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, sourceType4, sourceType5, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, TS4, TS5, IMapper, TD>)mappingFunction)(source1, source2, source3, source4, source5, this);
+                return ((Func<TS1, TS2, TS3, TS4, TS5, IMappify, TD>)mappingFunction)(source1, source2, source3, source4, source5, this);
             }
 
-            throw new MapperException(
+            throw new MappifyException(
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name}, {sourceType3.Name} => {destinationType.Name}");
         }
     }

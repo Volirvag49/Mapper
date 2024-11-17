@@ -1,23 +1,23 @@
-﻿using Mapper.Tests._0_Models;
+﻿using Mappify;
+using Mappify_Tests._0_Models;
+using Mappify_Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
-using Mapper;
-using Mapper.Tests._1_MappingProfiles;
 
-namespace Mapper.Tests.ObjectsTests
+namespace Mappify_Tests.ObjectsTests
 {
     public class ObjectsTests
     {
-        IMapper _mapper;
+        IMappify _Mappify;
 
         [SetUp]
         public void Setup()
         {
             var services = new ServiceCollection();
 
-            services.AddMapper().AddMapperProfile(typeof(ObjectMappingProfile));
+            services.AddMappify().AddMappifyProfile(typeof(ObjectMappingProfile));
 
             var serviceProvider = services.BuildServiceProvider();
-            _mapper = serviceProvider.GetRequiredService<IMapper>();
+            _Mappify = serviceProvider.GetRequiredService<IMappify>();
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace Mapper.Tests.ObjectsTests
         {
             var source1 = new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"};
 
-            var dest1 = _mapper.Map<DestinationClass>(source1);
+            var dest1 = _Mappify.Map<DestinationClass>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Id, dest1.Id);
@@ -43,7 +43,7 @@ namespace Mapper.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _mapper.Map<DestinationClass[]>(source1);
+            var dest1 = _Mappify.Map<DestinationClass[]>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Length, dest1.Length);
@@ -61,7 +61,7 @@ namespace Mapper.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _mapper.Map<DestinationClass[]>(source1);
+            var dest1 = _Mappify.Map<DestinationClass[]>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Count, dest1.Length);
@@ -78,7 +78,7 @@ namespace Mapper.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _mapper.Map<List<DestinationClass>>(source1);
+            var dest1 = _Mappify.Map<List<DestinationClass>>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Count, dest1.Count);
@@ -96,7 +96,7 @@ namespace Mapper.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _mapper.Map<List<DestinationClass>>(source1);
+            var dest1 = _Mappify.Map<List<DestinationClass>>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Length, dest1.Count);

@@ -1,15 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Mapper
+namespace Mappify
 {
     public static class DependencyInjection
     {
         /// <summary>
         /// Application DI.
         /// </summary>
-        public static IServiceCollection AddMapper(this IServiceCollection services)
+        public static IServiceCollection AddMappify(this IServiceCollection services)
         {
-            services.AddSingleton<IMapper, Mapper>();
+            services.AddSingleton<IMappify, Mappify>();
 
             return services;
         }
@@ -17,7 +17,7 @@ namespace Mapper
         /// <summary>
         /// Application DI.
         /// </summary>
-        public static IServiceCollection AddMapperProfile(this IServiceCollection services, params Type[] profiles)
+        public static IServiceCollection AddMappifyProfile(this IServiceCollection services, params Type[] profiles)
         {
             foreach (var profile in profiles)
             {

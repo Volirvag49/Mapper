@@ -1,16 +1,16 @@
-﻿namespace Mapper
+﻿namespace Mappify
 {
-    public interface IMapper
+    public interface IMappify
     {
-        void CreateMap<TS1, TD>(Func<TS1, IMapper, TD> mappingFunction);
+        void CreateMap<TS1, TD>(Func<TS1, IMappify, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TD>(Func<TS1, TS2, IMapper, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TD>(Func<TS1, TS2, IMappify, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TD>(Func<TS1, TS2, TS3, IMapper, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TD>(Func<TS1, TS2, TS3, IMappify, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TS4, TD>(Func<TS1, TS2, TS3, TS4, IMapper, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TS4, TD>(Func<TS1, TS2, TS3, TS4, IMappify, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TS4, TS5, TD>(Func<TS1, TS2, TS3, TS4, TS5, IMapper, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TS4, TS5, TD>(Func<TS1, TS2, TS3, TS4, TS5, IMappify, TD> mappingFunction);
 
         TD Map<TD>(object source);
 

@@ -1,6 +1,6 @@
-﻿namespace Mapper
+﻿namespace Mappify
 {
-    public partial class Mapper
+    public partial class Mappify
     {
         public List<TD> MapList<TD>(IEnumerable<object> sources)
         {

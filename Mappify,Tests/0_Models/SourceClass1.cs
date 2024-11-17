@@ -1,4 +1,4 @@
-﻿namespace Mapper.Tests._0_Models
+﻿namespace Mappify_Tests._0_Models
 {
     public class SourceClass1
     {

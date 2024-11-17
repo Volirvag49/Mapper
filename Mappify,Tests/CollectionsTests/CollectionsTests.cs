@@ -1,21 +1,22 @@
-﻿using Mapper.Tests._1_MappingProfiles;
+﻿using Mappify;
+using Mappify_Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mapper.Tests.CollectionsTests
+namespace Mappify_Tests.CollectionsTests
 {
     public class CollectionsTests
     {
-        IMapper _mapper;
+        IMappify _Mappify;
 
         [SetUp]
         public void Setup()
         {
             var services = new ServiceCollection();
 
-            services.AddMapper().AddMapperProfile(typeof(ObjectMappingProfile));
+            services.AddMappify().AddMappifyProfile(typeof(ObjectMappingProfile));
 
             var serviceProvider = services.BuildServiceProvider();
-            _mapper = serviceProvider.GetRequiredService<IMapper>();
+            _Mappify = serviceProvider.GetRequiredService<IMappify>();
         }
     }
 }

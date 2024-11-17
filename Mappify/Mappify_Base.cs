@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Mapper
+namespace Mappify
 {
-    public partial class Mapper : IMapper
+    public partial class Mappify : IMappify
     {
         private readonly Dictionary<(Type, Type, Type?, Type?, Type?, Type?), Delegate> _mappingConfigurations = new();
 
-        public Mapper(IServiceProvider provicer)
+        public Mappify(IServiceProvider provicer)
         {
             var profiles = provicer.GetServices<BaseMappingProfile>();
 
@@ -16,7 +16,7 @@ namespace Mapper
             }
         }
 
-        public Mapper(params BaseMappingProfile[] profiles)
+        public Mappify(params BaseMappingProfile[] profiles)
         {
             foreach (var profile in profiles)
             {
