@@ -1,7 +1,7 @@
 ﻿using Mappify;
-using Mappify_Tests._0_Models;
+using Mappify.Tests._0_Models;
 
-namespace Mappify_Tests._1_MappingProfiles
+namespace Mappify.Tests._1_MappingProfiles
 {
     public class OverloadsMappingProfile : BaseMappingProfile
     {

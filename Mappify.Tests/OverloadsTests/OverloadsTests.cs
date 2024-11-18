@@ -1,9 +1,8 @@
-﻿using Mappify;
-using Mappify_Tests._0_Models;
-using Mappify_Tests._1_MappingProfiles;
+﻿using Mappify.Tests._0_Models;
+using Mappify.Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mappify_Tests.OverloadsTests
+namespace Mappify.Tests.OverloadsTests
 {
     public class OverloadsTests
     {

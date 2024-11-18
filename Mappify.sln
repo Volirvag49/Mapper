@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappify", "Mappify\Mappify.csproj", "{7C800C4D-2C2C-4751-828B-E33ED20C1F37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mappify", "Mappify\Mappify.csproj", "{7C800C4D-2C2C-4751-828B-E33ED20C1F37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappify,Tests", "Mappify,Tests\Mappify,Tests.csproj", "{87E89703-3178-49AF-8065-26F787F886E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mappify.Tests", "Mappify.Tests\Mappify.Tests.csproj", "{6AEEAAC3-4955-4C5E-9566-9DF96353FF68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7C800C4D-2C2C-4751-828B-E33ED20C1F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C800C4D-2C2C-4751-828B-E33ED20C1F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C800C4D-2C2C-4751-828B-E33ED20C1F37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87E89703-3178-49AF-8065-26F787F886E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87E89703-3178-49AF-8065-26F787F886E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87E89703-3178-49AF-8065-26F787F886E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87E89703-3178-49AF-8065-26F787F886E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AEEAAC3-4955-4C5E-9566-9DF96353FF68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AEEAAC3-4955-4C5E-9566-9DF96353FF68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AEEAAC3-4955-4C5E-9566-9DF96353FF68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AEEAAC3-4955-4C5E-9566-9DF96353FF68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

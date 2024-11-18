@@ -1,8 +1,7 @@
-﻿using Mappify;
-using Mappify_Tests._1_MappingProfiles;
+﻿using Mappify.Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Mappify_Tests.CollectionsTests
+namespace Mappify.Tests.CollectionsTests
 {
     public class CollectionsTests
     {
