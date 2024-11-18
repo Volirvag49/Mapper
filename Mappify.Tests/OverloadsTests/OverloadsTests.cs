@@ -6,7 +6,7 @@ namespace Mappify.Tests.OverloadsTests
 {
     public class OverloadsTests
     {
-        IMappify _Mappify;
+        IMappify _mappify;
 
         [SetUp]
         public void Setup()
@@ -18,7 +18,7 @@ namespace Mappify.Tests.OverloadsTests
             services.AddMappifyProfile(typeof(OverloadsMappingProfile));
 
             var serviceProvider = services.BuildServiceProvider();
-            _Mappify = serviceProvider.GetRequiredService<IMappify>();
+            _mappify = serviceProvider.GetRequiredService<IMappify>();
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace Mappify.Tests.OverloadsTests
         {
             var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
 
-            var dest1 = _Mappify.Map<SourceClass1, DestinationClass>(source1);
+            var dest1 = _mappify.Map<SourceClass1, DestinationClass>(source1);
 
             AssertFields(source1, dest1);
 
@@ -38,7 +38,7 @@ namespace Mappify.Tests.OverloadsTests
             var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
             var source2 = new SourceClass2() { Id = Guid.NewGuid(), Name = "Source-2" };
 
-            var dest1 = _Mappify.Map<SourceClass1, SourceClass2,
+            var dest1 = _mappify.Map<SourceClass1, SourceClass2,
                 DestinationClass>(source1, source2);
 
             AssertFields(source1, dest1.FromSource1);
@@ -52,7 +52,7 @@ namespace Mappify.Tests.OverloadsTests
             var source2 = new SourceClass2() { Id = Guid.NewGuid(), Name = "Source-2" };
             var source3 = new SourceClass3() { Id = Guid.NewGuid(), Name = "Source-3" };
 
-            var dest1 = _Mappify.Map<SourceClass1, SourceClass2, SourceClass3,
+            var dest1 = _mappify.Map<SourceClass1, SourceClass2, SourceClass3,
                 DestinationClass>(source1, source2, source3);
 
             AssertFields(source1, dest1.FromSource1);
@@ -68,7 +68,7 @@ namespace Mappify.Tests.OverloadsTests
             var source3 = new SourceClass3() { Id = Guid.NewGuid(), Name = "Source-3" };
             var source4 = new SourceClass4() { Id = Guid.NewGuid(), Name = "Source-4" };
 
-            var dest1 = _Mappify.Map<SourceClass1, SourceClass2, SourceClass3,
+            var dest1 = _mappify.Map<SourceClass1, SourceClass2, SourceClass3,
                 SourceClass4, DestinationClass>(source1, source2, source3, source4);
 
             AssertFields(source1, dest1.FromSource1);
@@ -86,7 +86,7 @@ namespace Mappify.Tests.OverloadsTests
             var source4 = new SourceClass4() { Id = Guid.NewGuid(), Name = "Source-4" };
             var source5 = new SourceClass5() { Id = Guid.NewGuid(), Name = "Source-5" };
 
-            var dest1 = _Mappify.Map<SourceClass1, SourceClass2, SourceClass3,
+            var dest1 = _mappify.Map<SourceClass1, SourceClass2, SourceClass3,
                 SourceClass4, SourceClass5, DestinationClass>(source1, source2, source3, source4, source5);
 
             AssertFields(source1, dest1.FromSource1);

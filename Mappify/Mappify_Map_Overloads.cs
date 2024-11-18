@@ -15,7 +15,7 @@
             if (_mappingConfigurations.TryGetValue((sourceType, default, default, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, IMappify, TD>)mappingFunction)(source, this);
+                return ((Func<TS1, TD>)mappingFunction)(source);
             }
 
 
@@ -36,7 +36,7 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, default, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, IMappify, TD>)mappingFunction)(source1, source2, this);
+                return ((Func<TS1, TS2, TD>)mappingFunction)(source1, source2);
             }
 
             throw new MappifyException(
@@ -58,7 +58,7 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, default, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, IMappify, TD>)mappingFunction)(source1, source2, source3, this);
+                return ((Func<TS1, TS2, TS3, TD>)mappingFunction)(source1, source2, source3);
             }
 
             throw new MappifyException(
@@ -82,7 +82,7 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, sourceType4, default, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, TS4, IMappify, TD>)mappingFunction)(source1, source2, source3, source4, this);
+                return ((Func<TS1, TS2, TS3, TS4, TD>)mappingFunction)(source1, source2, source3, source4);
             }
 
             throw new MappifyException(
@@ -107,7 +107,7 @@
             if (_mappingConfigurations.TryGetValue((sourceType1, sourceType2, sourceType3, sourceType4, sourceType5, destinationType),
                     out var mappingFunction))
             {
-                return ((Func<TS1, TS2, TS3, TS4, TS5, IMappify, TD>)mappingFunction)(source1, source2, source3, source4, source5, this);
+                return ((Func<TS1, TS2, TS3, TS4, TS5, TD>)mappingFunction)(source1, source2, source3, source4, source5);
             }
 
             throw new MappifyException(

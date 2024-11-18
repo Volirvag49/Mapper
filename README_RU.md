@@ -37,7 +37,7 @@ services.AddMappify();
 services.AddMappifyProfile<MyMappingProfile>(); // Замените на ваш профиль маппинга
 var serviceProvider = services.BuildServiceProvider();
 
-var Mappify = serviceProvider.GetRequiredService<IMappify>();
+var mappify = serviceProvider.GetRequiredService<IMappify>();
 ```
 
 ### Создание профиля маппинга
@@ -47,9 +47,9 @@ var Mappify = serviceProvider.GetRequiredService<IMappify>();
 ```csharp
 public class MyMappingProfile : BaseMappingProfile
 {
-    public override void CreateMaps(IMappify Mappify)
+    public override void CreateMaps(IMappify mappify)
     {
-        Mappify.CreateMap<SourceClass, DestinationClass>(source => new DestinationClass
+        mappify.CreateMap<SourceClass, DestinationClass>(source => new DestinationClass
         {
             Property1 = source.Property1,
             Property2 = source.Property2
@@ -64,7 +64,7 @@ public class MyMappingProfile : BaseMappingProfile
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = Mappify.Map<SourceClass, DestinationClass>(source);
+var destination = mappify.Map<SourceClass, DestinationClass>(source);
 ```
 
 ### Универсальный метод маппинга
@@ -80,7 +80,7 @@ public TD Map<TD>(object source)
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = Mappify.Map<DestinationClass>(source);
+var destination = mappify.Map<DestinationClass>(source);
 ```
 Он так же умеет работать с коллекциями и массивами.
 Пример использования:
@@ -91,7 +91,7 @@ var sourceList = new List<SourceClass>
     new SourceClass { Property1 = "Value1", Property2 = "Value2" },
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
-var destinationList = Mappify.Map<List<DestinationClass>>(sourceList);
+var destinationList = mappify.Map<List<DestinationClass>>(sourceList);
 ```
 
 ### Маппинг коллекций
@@ -107,7 +107,7 @@ var sourceList = new List<SourceClass>
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
 
-var destinationList = Mappify.MapList<DestinationClass>(sourceList);
+var destinationList = mappify.MapList<DestinationClass>(sourceList);
 
 // destinationList теперь содержит два объекта DestinationClass
 ```
@@ -121,7 +121,7 @@ var sourceArray = new SourceClass[]
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
 
-var destinationArray = Mappify.MapArray<DestinationClass>(sourceArray);
+var destinationArray = mappify.MapArray<DestinationClass>(sourceArray);
 
 // destinationArray теперь содержит два объекта DestinationClass
 ```
@@ -133,7 +133,7 @@ var sourceQueue = new Queue<SourceClass>();
 sourceQueue.Enqueue(new SourceClass { Property1 = "Value1", Property2 = "Value2" });
 sourceQueue.Enqueue(new SourceClass { Property1 = "Value3", Property2 = "Value4" });
 
-var destinationQueue = Mappify.MapQueue<SourceClass, DestinationClass>(sourceQueue);
+var destinationQueue = mappify.MapQueue<SourceClass, DestinationClass>(sourceQueue);
 
 // destinationQueue теперь содержит два объекта DestinationClass
 ```
@@ -145,7 +145,7 @@ var sourceStack = new Stack<SourceClass>();
 sourceStack.Push(new SourceClass { Property1 = "Value1", Property2 = "Value2" });
 sourceStack.Push(new SourceClass { Property1 = "Value3", Property2 = "Value4" });
 
-var destinationStack = Mappify.MapStack<SourceClass, DestinationClass>(sourceStack);
+var destinationStack = mappify.MapStack<SourceClass, DestinationClass>(sourceStack);
 
 // destinationStack теперь содержит два объекта DestinationClass
 ```
@@ -159,7 +159,7 @@ var sourceDictionary = new Dictionary<int, SourceClass>
     { 2, new SourceClass { Property1 = "Value3", Property2 = "Value4" } }
 };
 
-var destinationDictionary = Mappify.MapDictionary<SourceClass, DestinationClass, int>(sourceDictionary);
+var destinationDictionary = mappify.MapDictionary<SourceClass, DestinationClass, int>(sourceDictionary);
 
 // destinationDictionary теперь содержит два объекта DestinationClass с теми же ключами
 ```
@@ -196,7 +196,7 @@ public TD Map<TS1, TD>(TS1 source)
 
 ```csharp
 var singleSource = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var singleDestination = Mappify.Map<SourceClass, DestinationClass>(singleSource);
+var singleDestination = mappify.Map<SourceClass, DestinationClass>(singleSource);
 ```
 
 #### Метод 2: Маппинг из нескольких источников
@@ -217,7 +217,7 @@ var source4 = new FourthSourceClass { FourthProperty = "Value4" };
 var source5 = new FifthSourceClass { FifthProperty = "Value5" };
 
 // Создание маппинга из несольких источников
-Mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
+mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
         (source1, source2, source3, source4, source5) => 
         {
             var combinedDestination = new CombinedDestinationClass
@@ -232,7 +232,7 @@ Mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSo
         });
 
 
-var combinedDestination = Mappify.Map<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(source1, source2, source3, source4, source5);
+var combinedDestination = mappify.Map<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(source1, source2, source3, source4, source5);
 ```
 
 ## Исключения

@@ -37,7 +37,7 @@ services.AddMappify();
 services.AddMappifyProfile<MyMappingProfile>(); // Replace with your mapping profile
 var serviceProvider = services.BuildServiceProvider();
 
-var Mappify = serviceProvider.GetRequiredService<IMappify>();
+var mappify = serviceProvider.GetRequiredService<IMappify>();
 ```
 
 ### Creating a Mapping Profile
@@ -47,9 +47,9 @@ Create a class that inherits from `BaseMappingProfile` and implement the `Create
 ```csharp
 public class MyMappingProfile : BaseMappingProfile
 {
-    public override void CreateMaps(IMappify Mappify)
+    public override void CreateMaps(IMappify mappify)
     {
-        Mappify.CreateMap<SourceClass, DestinationClass>(source => new DestinationClass
+        mappify.CreateMap<SourceClass, DestinationClass>(source => new DestinationClass
         {
             Property1 = source.Property1,
             Property2 = source.Property2
@@ -64,7 +64,7 @@ Now you can use the created mapper to map objects:
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = Mappify.Map<SourceClass, DestinationClass>(source);
+var destination = mappify.Map<SourceClass, DestinationClass>(source);
 ```
 
 ### Universal Mapping Method
@@ -79,7 +79,7 @@ This method allows mapping data from an object of any type to a target object of
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = Mappify.Map<DestinationClass>(source);
+var destination = mappify.Map<DestinationClass>(source);
 ```
 
 It also works with collections and arrays. Example usage:
@@ -90,7 +90,7 @@ var sourceList = new List<SourceClass>
     new SourceClass { Property1 = "Value1", Property2 = "Value2" },
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
-var destinationList = Mappify.Map<List<DestinationClass>>(sourceList);
+var destinationList = mappify.Map<List<DestinationClass>>(sourceList);
 ```
 
 ### Mapping Collections
@@ -106,7 +106,7 @@ var sourceList = new List<SourceClass>
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
 
-var destinationList = Mappify.MapList<DestinationClass>(sourceList);
+var destinationList = mappify.MapList<DestinationClass>(sourceList);
 
 // destinationList now contains two DestinationClass objects
 ```
@@ -120,7 +120,7 @@ var sourceArray = new SourceClass[]
     new SourceClass { Property1 = "Value3", Property2 = "Value4" }
 };
 
-var destinationArray = Mappify.MapArray<DestinationClass>(sourceArray);
+var destinationArray = mappify.MapArray<DestinationClass>(sourceArray);
 
 // destinationArray now contains two DestinationClass objects
 ```
@@ -132,7 +132,7 @@ var sourceQueue = new Queue<SourceClass>();
 sourceQueue.Enqueue(new SourceClass { Property1 = "Value1", Property2 = "Value2" });
 sourceQueue.Enqueue(new SourceClass { Property1 = "Value3", Property2 = "Value4" });
 
-var destinationQueue = Mappify.MapQueue<SourceClass, DestinationClass>(sourceQueue);
+var destinationQueue = mappify.MapQueue<SourceClass, DestinationClass>(sourceQueue);
 
 // destinationQueue now contains two DestinationClass objects
 ```
@@ -144,7 +144,7 @@ var sourceStack = new Stack<SourceClass>();
 sourceStack.Push(new SourceClass { Property1 = "Value1", Property2 = "Value2" });
 sourceStack.Push(new SourceClass { Property1 = "Value3", Property2 = "Value4" });
 
-var destinationStack = Mappify.MapStack<SourceClass, DestinationClass>(sourceStack);
+var destinationStack = mappify.MapStack<SourceClass, DestinationClass>(sourceStack);
 
 // destinationStack now contains two DestinationClass objects
 ```
@@ -158,7 +158,7 @@ var sourceDictionary = new Dictionary<int, SourceClass>
     { 2, new SourceClass { Property1 = "Value3", Property2 = "Value4" } }
 };
 
-var destinationDictionary = Mappify.MapDictionary<SourceClass, DestinationClass, int>(sourceDictionary);
+var destinationDictionary = mappify.MapDictionary<SourceClass, DestinationClass, int>(sourceDictionary);
 
 // destinationDictionary now contains two DestinationClass objects with the same keys
 ```
@@ -196,7 +196,7 @@ Example usage:
 
 ```csharp
 var singleSource = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var singleDestination = Mappify.Map<SourceClass, DestinationClass>(singleSource);
+var singleDestination = mappify.Map<SourceClass, DestinationClass>(singleSource);
 ```
 
 #### Method 2: Mapping from Multiple Sources
@@ -217,7 +217,7 @@ var source4 = new FourthSourceClass { FourthProperty = "Value4" };
 var source5 = new FifthSourceClass { FifthProperty = "Value5" };
 
 // Creating mapping from multiple sources
-Mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
+mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
         (source1, source2, source3, source4, source5) => 
         {
             var combinedDestination = new CombinedDestinationClass

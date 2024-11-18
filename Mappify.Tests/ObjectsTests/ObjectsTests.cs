@@ -6,7 +6,7 @@ namespace Mappify.Tests.ObjectsTests
 {
     public class ObjectsTests
     {
-        IMappify _Mappify;
+        IMappify _mappify;
 
         [SetUp]
         public void Setup()
@@ -16,7 +16,7 @@ namespace Mappify.Tests.ObjectsTests
             services.AddMappify().AddMappifyProfile(typeof(ObjectMappingProfile));
 
             var serviceProvider = services.BuildServiceProvider();
-            _Mappify = serviceProvider.GetRequiredService<IMappify>();
+            _mappify = serviceProvider.GetRequiredService<IMappify>();
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace Mappify.Tests.ObjectsTests
         {
             var source1 = new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"};
 
-            var dest1 = _Mappify.Map<DestinationClass>(source1);
+            var dest1 = _mappify.Map<DestinationClass>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Id, dest1.Id);
@@ -42,7 +42,7 @@ namespace Mappify.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _Mappify.Map<DestinationClass[]>(source1);
+            var dest1 = _mappify.Map<DestinationClass[]>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Length, dest1.Length);
@@ -60,7 +60,7 @@ namespace Mappify.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _Mappify.Map<DestinationClass[]>(source1);
+            var dest1 = _mappify.Map<DestinationClass[]>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Count, dest1.Length);
@@ -77,7 +77,7 @@ namespace Mappify.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _Mappify.Map<List<DestinationClass>>(source1);
+            var dest1 = _mappify.Map<List<DestinationClass>>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Count, dest1.Count);
@@ -95,7 +95,7 @@ namespace Mappify.Tests.ObjectsTests
                 new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
             };
 
-            var dest1 = _Mappify.Map<List<DestinationClass>>(source1);
+            var dest1 = _mappify.Map<List<DestinationClass>>(source1);
 
             Assert.NotNull(dest1);
             Assert.AreEqual(source1.Length, dest1.Count);

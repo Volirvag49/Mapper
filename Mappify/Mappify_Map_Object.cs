@@ -42,11 +42,6 @@ namespace Mappify
                     $"IDictionary not supported. Use  MapDictionary<T>()");
             }
 
-            ////if (source is BitArray)
-            ////{
-            ////    
-            ////}
-
             var result = MapObject(source, sourceType, destinationType);
 
             return (TD)result;
@@ -118,7 +113,7 @@ namespace Mappify
                 }
 
                 // Вызов делегата с использованием reflection
-                return func.DynamicInvoke(source, this);
+                return func.DynamicInvoke(source);
             }
 
             throw new MappifyException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");

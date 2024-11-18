@@ -2,15 +2,15 @@
 {
     public interface IMappify
     {
-        void CreateMap<TS1, TD>(Func<TS1, IMappify, TD> mappingFunction);
+        void CreateMap<TS1, TD>(Func<TS1,TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TD>(Func<TS1, TS2, IMappify, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TD>(Func<TS1, TS2, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TD>(Func<TS1, TS2, TS3, IMappify, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TD>(Func<TS1, TS2, TS3, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TS4, TD>(Func<TS1, TS2, TS3, TS4, IMappify, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TS4, TD>(Func<TS1, TS2, TS3, TS4, TD> mappingFunction);
 
-        void CreateMap<TS1, TS2, TS3, TS4, TS5, TD>(Func<TS1, TS2, TS3, TS4, TS5, IMappify, TD> mappingFunction);
+        void CreateMap<TS1, TS2, TS3, TS4, TS5, TD>(Func<TS1, TS2, TS3, TS4, TS5, TD> mappingFunction);
 
         TD Map<TD>(object source);
 

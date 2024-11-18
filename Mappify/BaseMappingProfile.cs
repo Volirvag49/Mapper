@@ -2,6 +2,6 @@
 {
     public abstract class BaseMappingProfile
     {
-        public abstract void CreateMaps(IMappify Mappify);
+        public abstract void CreateMaps(IMappify mappify);
     }
 }
