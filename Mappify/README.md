@@ -1,32 +1,32 @@
 # Mappify
 
-Mappify — это библиотека для простого и удобного маппинга объектов в C#. Она позволяет создавать маппинги между различными типами объектов с использованием функций, обеспечивая гибкость и простоту.
+Mappify is a library for easy and convenient object mapping in C#. It allows you to create mappings between different types of objects using functions, providing flexibility and simplicity.
 
-## Поддерживаемые типы маппинга
+## Supported Mapping Types
 
-Mappify поддерживает следующие типы маппинга:
+Mappify supports the following types of mappings:
 
-- Маппинг одиночных объектов
-- Маппинг массивов
-- Маппинг списков
-- Маппинг очередей
-- Маппинг стеков
-- Маппинг словарей
-- Маппинг из нескольких источников
+- Single object mapping
+- Array mapping
+- List mapping
+- Queue mapping
+- Stack mapping
+- Dictionary mapping
+- Mapping from multiple sources
 
-## Установка
+## Installation
 
-Вы можете установить библиотеку через NuGet:
+You can install the library via NuGet:
 
 ```bash
 dotnet add package Mappify
 ```
 
-## Использование
+## Usage
 
-### Настройка зависимостей
+### Setting Up Dependencies
 
-Для начала работы с библиотекой вам необходимо зарегистрировать `Mappify` и ваши профили маппинга в контейнере зависимостей. Это можно сделать следующим образом:
+To start working with the library, you need to register `Mappify` and your mapping profiles in the dependency container. You can do this as follows:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -34,15 +34,15 @@ using Mappify;
 
 var services = new ServiceCollection();
 services.AddMappify();
-services.AddMappifyProfile<MyMappingProfile>(); // Замените на ваш профиль маппинга
+services.AddMappifyProfile<MyMappingProfile>(); // Replace with your mapping profile
 var serviceProvider = services.BuildServiceProvider();
 
 var Mappify = serviceProvider.GetRequiredService<IMappify>();
 ```
 
-### Создание профиля маппинга
+### Creating a Mapping Profile
 
-Создайте класс, унаследованный от `BaseMappingProfile`, и реализуйте метод `CreateMaps` для определения маппинга:
+Create a class that inherits from `BaseMappingProfile` and implement the `CreateMaps` method to define the mapping:
 
 ```csharp
 public class MyMappingProfile : BaseMappingProfile
@@ -58,32 +58,31 @@ public class MyMappingProfile : BaseMappingProfile
 }
 ```
 
-### Маппинг объектов
+### Mapping Objects
 
-Теперь вы можете использовать созданный маппер для маппинга объектов:
+Now you can use the created mapper to map objects:
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
 var destination = Mappify.Map<SourceClass, DestinationClass>(source);
 ```
 
-### Универсальный метод маппинга
+### Universal Mapping Method
 
-Библиотека предоставляет универсальный метод для маппинга объектов:
+The library provides a universal method for mapping objects:
 
 ```csharp
 public TD Map<TD>(object source)
 ```
 
-Этот метод позволяет маппить данные из объекта произвольного типа в целевой объект типа `TD`.
-Пример использования:
+This method allows mapping data from an object of any type to a target object of type `TD`. Example usage:
 
 ```csharp
 var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
 var destination = Mappify.Map<DestinationClass>(source);
 ```
-Он так же умеет работать с коллекциями и массивами.
-Пример использования:
+
+It also works with collections and arrays. Example usage:
 
 ```csharp
 var sourceList = new List<SourceClass>
@@ -94,11 +93,11 @@ var sourceList = new List<SourceClass>
 var destinationList = Mappify.Map<List<DestinationClass>>(sourceList);
 ```
 
-### Маппинг коллекций
+### Mapping Collections
 
-Библиотека также поддерживает маппинг коллекций. Вот несколько примеров:
+The library also supports mapping collections. Here are a few examples:
 
-#### Пример 1: Маппинг списка объектов
+#### Example 1: Mapping a List of Objects
 
 ```csharp
 var sourceList = new List<SourceClass>
@@ -109,10 +108,10 @@ var sourceList = new List<SourceClass>
 
 var destinationList = Mappify.MapList<DestinationClass>(sourceList);
 
-// destinationList теперь содержит два объекта DestinationClass
+// destinationList now contains two DestinationClass objects
 ```
 
-#### Пример 2: Маппинг массива объектов
+#### Example 2: Mapping an Array of Objects
 
 ```csharp
 var sourceArray = new SourceClass[]
@@ -123,10 +122,10 @@ var sourceArray = new SourceClass[]
 
 var destinationArray = Mappify.MapArray<DestinationClass>(sourceArray);
 
-// destinationArray теперь содержит два объекта DestinationClass
+// destinationArray now contains two DestinationClass objects
 ```
 
-#### Пример 3: Маппинг очереди объектов
+#### Example 3: Mapping a Queue of Objects
 
 ```csharp
 var sourceQueue = new Queue<SourceClass>();
@@ -135,10 +134,10 @@ sourceQueue.Enqueue(new SourceClass { Property1 = "Value3", Property2 = "Value4"
 
 var destinationQueue = Mappify.MapQueue<SourceClass, DestinationClass>(sourceQueue);
 
-// destinationQueue теперь содержит два объекта DestinationClass
+// destinationQueue now contains two DestinationClass objects
 ```
 
-#### Пример 4: Маппинг стека объектов
+#### Example 4: Mapping a Stack of Objects
 
 ```csharp
 var sourceStack = new Stack<SourceClass>();
@@ -147,10 +146,10 @@ sourceStack.Push(new SourceClass { Property1 = "Value3", Property2 = "Value4" })
 
 var destinationStack = Mappify.MapStack<SourceClass, DestinationClass>(sourceStack);
 
-// destinationStack теперь содержит два объекта DestinationClass
+// destinationStack now contains two DestinationClass objects
 ```
 
-#### Пример 5: Маппинг словаря объектов
+#### Example 5: Mapping a Dictionary of Objects
 
 ```csharp
 var sourceDictionary = new Dictionary<int, SourceClass>
@@ -161,53 +160,54 @@ var sourceDictionary = new Dictionary<int, SourceClass>
 
 var destinationDictionary = Mappify.MapDictionary<SourceClass, DestinationClass, int>(sourceDictionary);
 
-// destinationDictionary теперь содержит два объекта DestinationClass с теми же ключами
+// destinationDictionary now contains two DestinationClass objects with the same keys
 ```
 
-### Маппинг из нескольких источников
+### Mapping from Multiple Sources
 
-Существует несолько перегрузок для маппинга из нескольких источников в один объект.
+There are several overloads for mapping from multiple sources into one object.
+
 ```csharp
-// Маппинг из 1 источника.
+// Mapping from 1 source.
 public TD Map<TS1, TD>(TS1 source1)
 
-// Маппинг из 2 источников.
-public TD Map<TS1, TS2, TD>(TS1 source1, TS2 source2, TS5 source5)
+// Mapping from 2 sources.
+public TD Map<TS1, TS2, TD>(TS1 source1, TS2 source2)
 
-// Маппинг из 3 источников.
-public TD Map<TS1, TS2, TS3, TD>(TS1 source1, TS2 source2, TS3 source3, TS5 source5)
+// Mapping from 3 sources.
+public TD Map<TS1, TS2, TS3, TD>(TS1 source1, TS2 source2, TS3 source3)
 
-// Маппинг из 4 источников.
+// Mapping from 4 sources.
 public TD Map<TS1, TS2, TS3, TS4, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4)
 
-// Маппинг из 5 источников.
+// Mapping from 5 sources.
 public TD Map<TS1, TS2, TS3, TS4, TS5, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4, TS5 source5)
 ```
 
-#### Метод 1: Маппинг из одного источника
+#### Method 1: Mapping from a Single Source
 
 ```csharp
 public TD Map<TS1, TD>(TS1 source)
 ```
 
-Этот метод позволяет маппить данные из одного источника `source` типа `TS1` в целевой объект типа `TD`. Он полезен, когда вам нужно преобразовать один объект в другой.
+This method allows mapping data from a single source `source` of type `TS1` to a target object of type `TD`. It is useful when you need to convert one object to another.
 
-Пример использования:
+Example usage:
 
 ```csharp
 var singleSource = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
 var singleDestination = Mappify.Map<SourceClass, DestinationClass>(singleSource);
 ```
 
-#### Метод 2: Маппинг из нескольких источников
+#### Method 2: Mapping from Multiple Sources
 
 ```csharp
 public TD Map<TS1, TS2, TS3, TS4, TS5, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4, TS5 source5)
 ```
 
-Этот метод позволяет маппить данные из нескольких источников (до пяти) в целевой объект типа `TD`. Это удобно, когда вам нужно объединить данные из нескольких объектов в один.
+This method allows mapping data from multiple sources (up to five) into a target object of type `TD`. This is convenient when you need to combine data from multiple objects into one.
 
-Пример использования:
+Example usage:
 
 ```csharp
 var source1 = new SourceClass { Property1 = "Value1" };
@@ -216,7 +216,7 @@ var source3 = new AdditionalSourceClass { AdditionalProperty = "Value3" };
 var source4 = new FourthSourceClass { FourthProperty = "Value4" };
 var source5 = new FifthSourceClass { FifthProperty = "Value5" };
 
-// Создание маппинга из несольких источников
+// Creating mapping from multiple sources
 Mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
         (source1, source2, source3, source4, source5) => 
         {
@@ -235,20 +235,24 @@ Mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSo
 var combinedDestination = Mappify.Map<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(source1, source2, source3, source4, source5);
 ```
 
-## Исключения
+## Exceptions
 
-В библиотеке определены исключения, которые могут возникать при ошибках маппинга:
+The library defines exceptions that may occur during mapping errors:
 
-- `MappifyException`: возникает, если маппинг для данного типа не определен.
+- `MappifyException`: occurs if the mapping for a given type is not defined.
 
-## Вклад
+## Contribution
 
-Если вы хотите внести свой вклад в проект, пожалуйста, создайте форк репозитория, внесите изменения и создайте пулл-реквест.
+If you want to contribute to the project, please create a fork of the repository, make changes, and create a pull request.
 
-## Лицензия
+## License
 
-Этот проект лицензирован под MIT License - смотрите файл [LICENSE](LICENSE) для подробностей.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Контакты
+## Contacts
 
-Если у вас есть вопросы или предложения, вы можете связаться со мной по почте lirikvolirvag@gmail.com
+If you have any questions or suggestions, you can contact me at lirikvolirvag@gmail.com.
+
+--- 
+
+Let me know if you need any further assistance!
