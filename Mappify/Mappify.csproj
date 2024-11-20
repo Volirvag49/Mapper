@@ -5,13 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Mappify</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Authors>Kirill Volirvag</Authors>
     <Product>Mappify</Product>
     <Description>A library for intuitive and flexible object mapping, empowering developers to simplify complex data transformations.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Volirvag49/Mappify</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageTags>Mapper, Auto mapper, Object mapper, factory</PackageTags>
   </PropertyGroup>
 
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="" Visible="False" />
+    <None Include="..\icon.png" Pack="true" PackagePath="" Visible="False" />
   </ItemGroup>
 
 </Project>

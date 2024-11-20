@@ -26,5 +26,15 @@ namespace Mappify
 
             return services;
         }
+
+        /// <summary>
+        /// Application DI.
+        /// </summary>
+        public static IServiceCollection AddMappifyProfile<T>(this IServiceCollection services)
+        {
+            services.AddSingleton(typeof(BaseMappingProfile), typeof(T));
+
+            return services;
+        }
     }
 }
