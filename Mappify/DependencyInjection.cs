@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Mappify
 {
@@ -33,6 +34,20 @@ namespace Mappify
         public static IServiceCollection AddMappifyProfile<T>(this IServiceCollection services)
         {
             services.AddSingleton(typeof(BaseMappingProfile), typeof(T));
+
+            return services;
+        }
+
+        /// <summary>
+        /// Application DI.
+        /// </summary>
+        public static IServiceCollection AddMappifyProfileForAssembly(this IServiceCollection services, Type assemblyType)
+        {
+            var mappings = assemblyType.Assembly.GetTypes()
+                .Where(q => typeof(BaseMappingProfile).IsAssignableFrom(q))
+                .ToArray();
+
+            services.AddMappifyProfile(mappings);
 
             return services;
         }

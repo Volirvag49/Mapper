@@ -2,7 +2,7 @@
 {
     public partial class Mappify
     {
-        public TD Map<TS1, TD>(TS1 source)
+        public virtual TD Map<TS1, TD>(TS1 source)
         {
             if (source == null)
             {
@@ -22,7 +22,7 @@
             throw new MappifyException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
         }
 
-        public TD Map<TS1, TS2, TD>(TS1 source1, TS2 source2)
+        public virtual TD Map<TS1, TS2, TD>(TS1 source1, TS2 source2)
         {
             if (source1 == null)
             {
@@ -43,7 +43,7 @@
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name} => {destinationType.Name}");
         }
 
-        public TD Map<TS1, TS2, TS3, TD>(TS1 source1, TS2 source2, TS3 source3)
+        public virtual TD Map<TS1, TS2, TS3, TD>(TS1 source1, TS2 source2, TS3 source3)
         {
             if (source1 == null)
             {
@@ -65,7 +65,7 @@
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name}, {sourceType3.Name} => {destinationType.Name}");
         }
 
-        public TD Map<TS1, TS2, TS3, TS4, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4)
+        public virtual TD Map<TS1, TS2, TS3, TS4, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4)
         {
             if (source1 == null)
             {
@@ -89,7 +89,7 @@
                 $"Mapping profile required: {sourceType1.Name}, {sourceType2.Name}, {sourceType3.Name} => {destinationType.Name}");
         }
 
-        public TD Map<TS1, TS2, TS3, TS4, TS5, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4, TS5 source5)
+        public virtual TD Map<TS1, TS2, TS3, TS4, TS5, TD>(TS1 source1, TS2 source2, TS3 source3, TS4 source4, TS5 source5)
         {
             if (source1 == null)
             {

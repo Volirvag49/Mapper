@@ -4,7 +4,7 @@ namespace Mappify
 {
     public partial class Mappify
     {
-        public TD Map<TD>(object source)
+        public virtual TD Map<TD>(object source)
         {
             if (source == null)
             {
@@ -47,7 +47,7 @@ namespace Mappify
             return (TD)result;
         }
 
-        private TD MapCollection<TD>(object source, Type sourceType, Type destinationType)
+        protected TD MapCollection<TD>(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
@@ -69,7 +69,7 @@ namespace Mappify
             return (TD)resultCollection;
         }
 
-        private TD MapArray<TD>(object source, Type sourceType, Type destinationType)
+        protected TD MapArray<TD>(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
@@ -92,7 +92,7 @@ namespace Mappify
             return (TD)(object)resultArray; // Приведение к TD
         }
 
-        private object MapObject(object source, Type sourceType, Type destinationType)
+        protected object MapObject(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
@@ -120,7 +120,7 @@ namespace Mappify
         }
 
 
-        private bool IsGenericType(Type type, Type genericTypeDefinition, out Type genericArgument)
+        protected bool IsGenericType(Type type, Type genericTypeDefinition, out Type genericArgument)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
             {

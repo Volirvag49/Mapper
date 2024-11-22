@@ -2,7 +2,7 @@
 {
     public partial class Mappify
     {
-        public List<TD> MapList<TD>(IEnumerable<object> sources)
+        public virtual List<TD> MapList<TD>(IEnumerable<object> sources)
         {
             if (sources == null)
             {
@@ -24,7 +24,7 @@
             return result;
         }
 
-        public List<TD> MapList<TD>(object[] sources)
+        public virtual List<TD> MapList<TD>(object[] sources)
         {
             if (sources == null)
             {
@@ -46,7 +46,7 @@
             return result;
         }
 
-        public TD[] MapArray<TD>(object[] sources)
+        public virtual TD[] MapArray<TD>(object[] sources)
         {
             if (sources == null)
             {
@@ -69,7 +69,7 @@
             return result.ToArray();
         }
 
-        public TD[] MapArray<TD>(IEnumerable<object> sources)
+        public virtual TD[] MapArray<TD>(IEnumerable<object> sources)
         {
             if (sources == null)
             {
@@ -92,7 +92,7 @@
             return result.ToArray();
         }
 
-        public Queue<TD> MapQueue<TS1, TD>(Queue<TS1> sources)
+        public virtual Queue<TD> MapQueue<TS1, TD>(Queue<TS1> sources)
         {
             if (sources == null)
             {
@@ -114,7 +114,7 @@
             return result;
         }
 
-        public Stack<TD> MapStack<TS1, TD>(Stack<TS1> sources)
+        public virtual Stack<TD> MapStack<TS1, TD>(Stack<TS1> sources)
         {
             if (sources == null)
             {
@@ -136,7 +136,7 @@
             return result;
         }
 
-        public IDictionary<TDk, TD> MapDictionary<TS1, TD, TDk>(IDictionary<TDk, TS1> sources)
+        public virtual IDictionary<TDk, TD> MapDictionary<TS1, TD, TDk>(IDictionary<TDk, TS1> sources)
         {
             if (sources == null)
             {

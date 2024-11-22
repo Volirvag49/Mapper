@@ -1,5 +1,4 @@
-﻿using Mappify;
-using Mappify.Tests._0_Models;
+﻿using Mappify.Tests._0_Models;
 
 namespace Mappify.Tests._1_MappingProfiles
 {

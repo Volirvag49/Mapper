@@ -4,7 +4,7 @@ namespace Mappify
 {
     public partial class Mappify : IMappify
     {
-        private readonly Dictionary<(Type, Type, Type?, Type?, Type?, Type?), Delegate> _mappingConfigurations = new();
+        protected readonly Dictionary<(Type, Type, Type?, Type?, Type?, Type?), Delegate> _mappingConfigurations = new();
 
         public Mappify(IServiceProvider provicer)
         {
