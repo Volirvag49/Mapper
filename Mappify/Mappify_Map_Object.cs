@@ -16,12 +16,12 @@ namespace Mappify
 
             if (sourceType.IsArray)
             {
-                return MapArray<TD>(source, sourceType, destinationType);
+                return InternalMapArray<TD>(source, sourceType, destinationType);
             }
 
             if (source is IList)
             {
-                return MapCollection<TD>(source, sourceType, destinationType);
+                return InternalMapCollection<TD>(source, sourceType, destinationType);
             }
 
             if (IsGenericType(sourceType, typeof(Stack<>), out var stackGenericType))
@@ -42,12 +42,12 @@ namespace Mappify
                     $"IDictionary not supported. Use  MapDictionary<T>()");
             }
 
-            var result = MapObject(source, sourceType, destinationType);
+            var result = InternalMapObject(source, sourceType, destinationType);
 
             return (TD)result;
         }
 
-        protected TD MapCollection<TD>(object source, Type sourceType, Type destinationType)
+        protected virtual TD InternalMapCollection<TD>(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
@@ -62,14 +62,14 @@ namespace Mappify
 
             foreach (var item in (IEnumerable)source)
             {
-                var mapped = MapObject(item, item.GetType(), destElementType);
+                var mapped = InternalMapObject(item, item.GetType(), destElementType);
                 resultCollection.Add(mapped);
             }
 
             return (TD)resultCollection;
         }
 
-        protected TD MapArray<TD>(object source, Type sourceType, Type destinationType)
+        protected virtual TD InternalMapArray<TD>(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
@@ -84,26 +84,24 @@ namespace Mappify
             for (var i = 0; i < sourceArray.Length; i++)
             {
                 var value = sourceArray.GetValue(i);
-                var mapped = MapObject(value, value.GetType(), destElementType);
+                var mapped = InternalMapObject(value, value.GetType(), destElementType);
 
                 resultArray.SetValue(Convert.ChangeType(mapped, destElementType), i);
             }
 
-            return (TD)(object)resultArray; // Приведение к TD
+            return (TD)(object)resultArray;
         }
 
-        protected object MapObject(object source, Type sourceType, Type destinationType)
+        protected virtual object InternalMapObject(object source, Type sourceType, Type destinationType)
         {
             if (source == null)
             {
                 return default;
             }
 
-            // Проверка, существует ли маппинг для данного типа
             if (_mappingConfigurations.TryGetValue((sourceType, default, default, default, default, destinationType),
                     out var mappingFunction))
             {
-                // Приведение к делегату, принимающему object
                 var func = mappingFunction;
 
                 if (func == null)
@@ -112,15 +110,13 @@ namespace Mappify
                         $"Mapping function for {sourceType.Name} to {destinationType.Name} is not valid.");
                 }
 
-                // Вызов делегата с использованием reflection
                 return func.DynamicInvoke(source);
             }
 
             throw new MappifyException($"Mapping profile required: {sourceType.Name} => {destinationType.Name}");
         }
 
-
-        protected bool IsGenericType(Type type, Type genericTypeDefinition, out Type genericArgument)
+        protected virtual bool IsGenericType(Type type, Type genericTypeDefinition, out Type genericArgument)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
             {
