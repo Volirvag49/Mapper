@@ -22,6 +22,7 @@ You can install the library via NuGet:
 dotnet add package Mappify
 ```
 
+[Examples (GitHub)](https://github.com/Volirvag49/Mappify/tree/main/Mappify.Tests)
 ## Usage
 
 ### Setting Up Dependencies
@@ -34,9 +35,19 @@ using Mappify;
 
 var services = new ServiceCollection();
 services.AddMappify();
-services.AddMappifyProfile<MyMappingProfile>(); // Replace with your mapping profile
-var serviceProvider = services.BuildServiceProvider();
 
+// Choose your style:
+//1. Auto: Register all in assembly.
+services.AddMappifyProfileForAssembly(typeof(Startup));
+
+//2. Typed.
+services.AddMappifyProfile<ObjectMappingProfile>();
+services.AddMappifyProfile<OverloadsMappingProfile>();
+ 
+// 2.Parameterized.
+services.AddMappifyProfile(typeof(ObjectMappingProfile), typeof(OverloadsMappingProfile));
+
+var serviceProvider = services.BuildServiceProvider();
 var mappify = serviceProvider.GetRequiredService<IMappify>();
 ```
 
@@ -45,17 +56,17 @@ var mappify = serviceProvider.GetRequiredService<IMappify>();
 Create a class that inherits from `BaseMappingProfile` and implement the `CreateMaps` method to define the mapping:
 
 ```csharp
-public class MyMappingProfile : BaseMappingProfile
-{
-    public override void CreateMaps(IMappify mappify)
-    {
-        mappify.CreateMap<SourceClass, DestinationClass>(source => new DestinationClass
-        {
-            Property1 = source.Property1,
-            Property2 = source.Property2
-        });
-    }
-}
+ public class ObjectMappingProfile : BaseMappingProfile
+ {
+     public override void CreateMaps(IMappify Mappify)
+     {
+         Mappify.CreateMap<SourceClass1, DestinationClass>(source1 => new DestinationClass
+         {
+             Id = source1.Id,
+             Name = source1.Name,
+         });
+     }
+ }
 ```
 
 ### Mapping Objects
@@ -63,8 +74,8 @@ public class MyMappingProfile : BaseMappingProfile
 Now you can use the created mapper to map objects:
 
 ```csharp
-var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = mappify.Map<SourceClass, DestinationClass>(source);
+ var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
+ var dest1 = _mappify.Map<SourceClass1, DestinationClass>(source1);
 ```
 
 ### Universal Mapping Method
@@ -74,41 +85,40 @@ The library provides a universal method for mapping objects:
 ```csharp
 public TD Map<TD>(object source)
 ```
-
 This method allows mapping data from an object of any type to a target object of type `TD`. Example usage:
-
+#### Example 1:  Object to Object
 ```csharp
-var source = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var destination = mappify.Map<DestinationClass>(source);
+  var source1 = new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"};
+  var dest1 = _mappify.Map<DestinationClass>(source1);
 ```
 
 It also works with collections and arrays. Example usage:
-
+#### Example 2:  Collection or Array to  Collection or Array
 ```csharp
-var sourceList = new List<SourceClass>
-{
-    new SourceClass { Property1 = "Value1", Property2 = "Value2" },
-    new SourceClass { Property1 = "Value3", Property2 = "Value4" }
-};
-var destinationList = mappify.Map<List<DestinationClass>>(sourceList);
+ var source1 = new SourceClass1[]
+ {
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"},
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-2"},
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-3"},
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-4"},
+ };
+
+ var dest1 = _mappify.Map<DestinationClass[]>(source1);
 ```
 
 ### Mapping Collections
-
 The library also supports mapping collections. Here are a few examples:
 
 #### Example 1: Mapping a List of Objects
 
 ```csharp
-var sourceList = new List<SourceClass>
-{
-    new SourceClass { Property1 = "Value1", Property2 = "Value2" },
-    new SourceClass { Property1 = "Value3", Property2 = "Value4" }
-};
+ var source1 = new List<SourceClass1>
+ {
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"},
+     new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-2"},
+ };
 
-var destinationList = mappify.MapList<DestinationClass>(sourceList);
-
-// destinationList now contains two DestinationClass objects
+ var dest1 = _mappify.Map<DestinationClass[]>(source1);
 ```
 
 #### Example 2: Mapping an Array of Objects
@@ -195,8 +205,8 @@ This method allows mapping data from a single source `source` of type `TS1` to a
 Example usage:
 
 ```csharp
-var singleSource = new SourceClass { Property1 = "Value1", Property2 = "Value2" };
-var singleDestination = mappify.Map<SourceClass, DestinationClass>(singleSource);
+  var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
+  var dest1 = _mappify.Map<SourceClass1, DestinationClass>(source1);
 ```
 
 #### Method 2: Mapping from Multiple Sources
@@ -210,29 +220,29 @@ This method allows mapping data from multiple sources (up to five) into a target
 Example usage:
 
 ```csharp
-var source1 = new SourceClass { Property1 = "Value1" };
-var source2 = new OtherSourceClass { OtherProperty = "Value2" };
-var source3 = new AdditionalSourceClass { AdditionalProperty = "Value3" };
-var source4 = new FourthSourceClass { FourthProperty = "Value4" };
-var source5 = new FifthSourceClass { FifthProperty = "Value5" };
+ var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
+ var source2 = new SourceClass2() { Id = Guid.NewGuid(), Name = "Source-2" };
+ var source3 = new SourceClass3() { Id = Guid.NewGuid(), Name = "Source-3" };
+ var source4 = new SourceClass4() { Id = Guid.NewGuid(), Name = "Source-4" };
+ var source5 = new SourceClass5() { Id = Guid.NewGuid(), Name = "Source-5" };
 
-// Creating mapping from multiple sources
-mappify.CreateMap<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(
-        (source1, source2, source3, source4, source5) => 
-        {
-            var combinedDestination = new CombinedDestinationClass
-            {
-                CombinedProperty1 = source1.Property1,
-                CombinedProperty2 = source2.OtherProperty,
-                CombinedProperty3 = source3.AdditionalProperty,
-                CombinedProperty4 = source4.FourthProperty,
-                CombinedProperty5 = source5.FifthProperty
-            };
-            return combinedDestination;
-        });
+// OverloadsMappingProfile class
+ mappify.CreateMap<SourceClass1, SourceClass2, SourceClass3, SourceClass4, SourceClass5, DestinationClass>((source1, source2, source3, source4, source5) =>
+ {
+     var dest = new DestinationClass
+     {
+         FromSource1 = mappify.Map<DestinationClass>(source1),
+         FromSource2 = new DestinationClass() { Id = source2.Id, Name = source2.Name},
+         FromSource3 = new DestinationClass() { Id = source3.Id, Name = source3.Name },
+         FromSource4 = new DestinationClass() { Id = source4.Id, Name = source4.Name },
+         FromSource5 = new DestinationClass() { Id = source5.Id, Name = source5.Name },
+     };
 
+     return dest;
+ });
 
-var combinedDestination = Mappify.Map<SourceClass, OtherSourceClass, AdditionalSourceClass, FourthSourceClass, FifthSourceClass, CombinedDestinationClass>(source1, source2, source3, source4, source5);
+ var dest1 = _mappify.Map<SourceClass1, SourceClass2, SourceClass3,
+     SourceClass4, SourceClass5, DestinationClass>(source1, source2, source3, source4, source5);
 ```
 
 ## Exceptions

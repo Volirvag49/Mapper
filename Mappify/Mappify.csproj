@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Mappify</PackageId>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Authors>Kirill Volirvag</Authors>
     <Product>Mappify</Product>
     <Description>A library for intuitive and flexible object mapping, empowering developers to simplify complex data transformations.</Description>
