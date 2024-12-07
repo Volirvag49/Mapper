@@ -1,6 +1,7 @@
 ﻿using Mappify.Tests._0_Models;
 using Mappify.Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework.Legacy;
 
 namespace Mappify.Tests.ObjectsTests
 {
@@ -22,13 +23,13 @@ namespace Mappify.Tests.ObjectsTests
         [Test]
         public void Map_Object_Test()
         {
-            var source1 = new SourceClass1() {Id = Guid.NewGuid(), Name = "Source-1"};
+            var source1 = new SourceClass1() { Id = Guid.NewGuid(), Name = "Source-1" };
 
             var dest1 = _mappify.Map<DestinationClass>(source1);
 
-            Assert.NotNull(dest1);
-            Assert.AreEqual(source1.Id, dest1.Id);
-            Assert.AreEqual(source1.Name, dest1.Name);
+            ClassicAssert.NotNull(dest1);
+            ClassicAssert.AreEqual(source1.Id, dest1.Id);
+            ClassicAssert.AreEqual(source1.Name, dest1.Name);
         }
 
         [Test]
@@ -44,8 +45,8 @@ namespace Mappify.Tests.ObjectsTests
 
             var dest1 = _mappify.Map<DestinationClass[]>(source1);
 
-            Assert.NotNull(dest1);
-            Assert.AreEqual(source1.Length, dest1.Length);
+            ClassicAssert.NotNull(dest1);
+            ClassicAssert.AreEqual(source1.Length, dest1.Length);
         }
 
         [Test]
@@ -62,8 +63,8 @@ namespace Mappify.Tests.ObjectsTests
 
             var dest1 = _mappify.Map<DestinationClass[]>(source1);
 
-            Assert.NotNull(dest1);
-            Assert.AreEqual(source1.Count, dest1.Length);
+            ClassicAssert.NotNull(dest1);
+            ClassicAssert.AreEqual(source1.Count, dest1.Length);
         }
 
         [Test]
@@ -79,8 +80,8 @@ namespace Mappify.Tests.ObjectsTests
 
             var dest1 = _mappify.Map<List<DestinationClass>>(source1);
 
-            Assert.NotNull(dest1);
-            Assert.AreEqual(source1.Count, dest1.Count);
+            ClassicAssert.NotNull(dest1);
+            ClassicAssert.AreEqual(source1.Count, dest1.Count);
         }
 
         [Test]
@@ -97,8 +98,8 @@ namespace Mappify.Tests.ObjectsTests
 
             var dest1 = _mappify.Map<List<DestinationClass>>(source1);
 
-            Assert.NotNull(dest1);
-            Assert.AreEqual(source1.Length, dest1.Count);
+            ClassicAssert.NotNull(dest1);
+            ClassicAssert.AreEqual(source1.Length, dest1.Count);
         }
     }
 }

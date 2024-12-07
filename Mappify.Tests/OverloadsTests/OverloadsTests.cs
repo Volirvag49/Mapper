@@ -1,6 +1,7 @@
 ﻿using Mappify.Tests._0_Models;
 using Mappify.Tests._1_MappingProfiles;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework.Legacy;
 
 namespace Mappify.Tests.OverloadsTests
 {
@@ -98,9 +99,9 @@ namespace Mappify.Tests.OverloadsTests
 
         private void AssertFields(SourceClass1 source, DestinationClass dest)
         {
-            Assert.NotNull(dest);
-            Assert.AreEqual(source.Id, dest.Id);
-            Assert.AreEqual(source.Name, dest.Name);
+            ClassicAssert.NotNull(dest);
+            ClassicAssert.AreEqual(source.Id, dest.Id);
+            ClassicAssert.AreEqual(source.Name, dest.Name);
         }
     }
 }

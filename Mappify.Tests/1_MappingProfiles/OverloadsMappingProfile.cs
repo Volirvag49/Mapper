@@ -1,5 +1,4 @@
-﻿using Mappify;
-using Mappify.Tests._0_Models;
+﻿using Mappify.Tests._0_Models;
 
 namespace Mappify.Tests._1_MappingProfiles
 {
@@ -60,7 +59,7 @@ namespace Mappify.Tests._1_MappingProfiles
                 var dest = new DestinationClass
                 {
                     FromSource1 = mappify.Map<DestinationClass>(source1),
-                    FromSource2 = new DestinationClass() { Id = source2.Id, Name = source2.Name},
+                    FromSource2 = new DestinationClass() { Id = source2.Id, Name = source2.Name },
                     FromSource3 = new DestinationClass() { Id = source3.Id, Name = source3.Name },
                     FromSource4 = new DestinationClass() { Id = source4.Id, Name = source4.Name },
                     FromSource5 = new DestinationClass() { Id = source5.Id, Name = source5.Name },

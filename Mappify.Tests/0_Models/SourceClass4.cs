@@ -2,6 +2,6 @@
 {
     public class SourceClass4 : SourceClass1
     {
-    
+
     }
 }

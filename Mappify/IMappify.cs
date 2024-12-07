@@ -2,7 +2,7 @@
 {
     public interface IMappify
     {
-        void CreateMap<TS1, TD>(Func<TS1,TD> mappingFunction);
+        void CreateMap<TS1, TD>(Func<TS1, TD> mappingFunction);
 
         void CreateMap<TS1, TS2, TD>(Func<TS1, TS2, TD> mappingFunction);
 
