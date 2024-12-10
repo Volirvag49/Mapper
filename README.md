@@ -1,4 +1,6 @@
 # Mappify
+[![NuGet](http://img.shields.io/nuget/vpre/mappify.svg?label=NuGet)](https://www.nuget.org/packages/mappify/)
+[![Wiki](https://img.shields.io/badge/Wiki-blue)](https://github.com/Volirvag49/Mappify)
 
 Mappify is a library for easy and convenient object mapping in C#. It allows you to create mappings between different types of objects using functions, providing flexibility and simplicity.
 
